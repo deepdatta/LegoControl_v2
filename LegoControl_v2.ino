@@ -29,6 +29,15 @@
 #include <String.h>                          // contains function strtok: split string into tokens
 #include <SoftwareSerial.h>
 
+#define _DEBUG_
+#ifdef _DEBUG_
+#define DEBUG_PRINT(...) Serial.print(__VA_ARGS__)
+#define DEBUG_PRINTLN(...) Serial.println(__VA_ARGS__)
+#else /* _DEBUG_ */
+#define DEBUG_PRINT(...)
+#define DEBUG_PRINTLN(...)
+#endif /* _DEBUG_ */
+
 class LegoControlPort2 {
   private:
     int8_t pin_in1;
@@ -60,7 +69,7 @@ class LegoControlPort2 {
         init();     // Initialize on state change
       }
       enabled = en;
-      Serial.print("P"); Serial.print(id); Serial.print(en ? " : Enabled" : " : Disabled");
+      DEBUG_PRINT("P"); DEBUG_PRINT(id); DEBUG_PRINTLN(en ? " : Enabled" : " : Disabled");
     }
 
     void set_vector(int vector) {
@@ -71,11 +80,11 @@ class LegoControlPort2 {
       if (vector < 0) {
         digitalWrite(pin_in1, HIGH);
         analogWrite(pin_in2, UINT8_MAX + vector);
-        Serial.print("P"); Serial.print(id); Serial.print(", Hi - ");Serial.println(vector);
+        DEBUG_PRINT("P"); DEBUG_PRINT(id); DEBUG_PRINT(", Hi - "); DEBUG_PRINTLN(vector);
       } else {
         digitalWrite(pin_in1, LOW);
         analogWrite(pin_in2, vector);
-        Serial.print("P"); Serial.print(id); Serial.print(", Lo - ");Serial.println(vector);
+        DEBUG_PRINT("P"); DEBUG_PRINT(id); DEBUG_PRINT(", Lo - "); DEBUG_PRINTLN(vector);
       }
     }
 };
@@ -116,6 +125,8 @@ void setup() {
 
   mySerial.begin(9600);
   mySerial.setTimeout(1000);
+
+  Serial.println("Initialization Done");
 }
 
 // Serial buffer size: calculate based on max input size expected for one command over bluetooth serial interface
@@ -139,7 +150,7 @@ void loop() {
     }
 
     int portnum = buff[1] - '0';
-    arg = atoi(buff + 2);
+    arg = atoi(buff + 3);
 
     switch (buff[2]) {
       case 'E':

@@ -117,14 +117,14 @@ LegoControlPort2 LegoControl2::con_ports[MAX_CON_PORTS] = {
 
 /*================================================================================= */
 
-SoftwareSerial mySerial(16, 17); // RX, TX
+SoftwareSerial bluetoothSerial(16, 17); // RX, TX
 
 void setup() {
   Serial.begin(9600);                       // initialize serial communication
   Serial.setTimeout(1000);                  // 1000 ms time out
 
-  mySerial.begin(9600);
-  mySerial.setTimeout(1000);
+  bluetoothSerial.begin(9600);
+  bluetoothSerial.setTimeout(1000);
 
   Serial.println("Initialization Done");
 }
@@ -138,7 +138,7 @@ void loop() {
   byte size;
   int arg;
 
-  while ((size = mySerial.readBytesUntil('\n', buff, INPUT_SIZE))) {  //read Serial until new line or buffer full or time out
+  while ((size = bluetoothSerial.readBytesUntil('\n', buff, INPUT_SIZE))) {  //read Serial until new line or buffer full or time out
     // Valid commnads are of type "P<1byte port num><1byte OP code><arg1>\n"
     // P0E1    Enable Port0
     // P0E0    Disable Port0

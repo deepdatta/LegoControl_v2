@@ -109,10 +109,10 @@ class LegoControl2 {
 
 };
 LegoControlPort2 LegoControl2::con_ports[MAX_CON_PORTS] = {
-  LegoControlPort2(0, 2, 3),
-  LegoControlPort2(1, 8, 9),
-  LegoControlPort2(2, 14, 10),
-  LegoControlPort2(3, 12, 11)
+  LegoControlPort2(0, 10, 14),
+  LegoControlPort2(1, 2, 3),
+  LegoControlPort2(2, 12, 11),
+  LegoControlPort2(3, 8, 9)
 };
 
 /*================================================================================= */

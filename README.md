@@ -38,3 +38,13 @@ command format: P "1byte port num" "1byte OP code" "arg"\n
 |P0E0\n    |Disable Port0 |
 |P0S100\n  |Port0 Fwd Speed 100|
 |P1S-200\n |Port1 Rev Speed 200| 
+
+
+## Circuit and Schematics
+
+Wiring the output to 4 Lego PF connectors, the pinout is as below.
+The output of the L298N will go to C1 and C2. The GND and +9v is required for the Servo, the M, L, XL motors don't need them.
+![Lego PF pin info](https://github.com/deepdatta/LegoControl_v2/blob/master/wirelabels.jpg)
+
+## Reference
+https://scuttlebots.com/2014/03/02/lego-pf-hacking-wiring/
